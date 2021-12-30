@@ -2,11 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
+const char* baseName="sets/gSet";
 
 const int false=0;
 const int true =1;
 
-const char* baseName="sets/gSet";
+char arg1[]="10   ";
+char arg2[]="10.1 ";
+
 char* fName=NULL;
 
 

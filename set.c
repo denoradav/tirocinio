@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "function.h"
 
 short nElem;
 short nSubset;
@@ -71,8 +69,10 @@ void init(){
     int i,k;
     char line[256];
     char *p;
-    char fName[] = "sets/gSet10.1.txt"; 
     FILE *fp=NULL;
+    fName=setFileName(arg1);
+    printf("%s \n",fName);
+    
 
     fp = fopen(fName,"r");
     if (fp==NULL){
@@ -170,12 +170,20 @@ short findMax(short *list,short nSubSet){
     return maxInd;
 }
 
-int main(){
+int main (int argc, char *argv[]){
     int i,k;
     short uncovered=nElem;
-    
+    strcpy(arg1, "10.1");
     short maxInd;
+    if (argc==2){
+        strcpy(arg1, argv[1]);
+        strcpy(arg2, argv[1]);
+        //strcpy(dest, src);
+        //*arg1=*argv[1];
+        //*arg2=*argv[2];
+    }
     
+
     init();
     //printYPos();
     //printY();

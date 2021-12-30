@@ -12,8 +12,7 @@ int upper, lower;
 int isUnion=false;
 int *arr,*lenArr;
 
-char arg1[]="10";
-char arg2[]="10.1";
+
 
 
 //prototipi di funzione
@@ -27,11 +26,17 @@ void writeOnfile(char* arg2);
 
 
 int main (int argc, char *argv[]){
+    printf("%i \n",argc);
     attempts=0;
     if (argc==3){
-        *arg1=*argv[1];
-        *arg2=*argv[2];
+        strcpy(arg1, argv[1]);
+        strcpy(arg2, argv[2]);
+        //strcpy(dest, src);
+        //*arg1=*argv[1];
+        //*arg2=*argv[2];
     }
+    printf("%s \n",arg1);
+    printf("%s \n",arg2);
     setInit(arg1);
     ;
     do

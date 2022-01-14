@@ -23,9 +23,7 @@ short *x,*xList,*xPos;
 
 
 
-void nl(){
-    printf("\n");
-}
+
 
 void fromXtoY(){
     int i,k,w;
@@ -178,83 +176,13 @@ int main (int argc, char *argv[]){
     if (argc==2){
         strcpy(arg1, argv[1]);
         strcpy(arg2, argv[1]);
-        //strcpy(dest, src);
-        //*arg1=*argv[1];
-        //*arg2=*argv[2];
     }
     
 
     init();
-    //printYPos();
-    //printY();
-    //nl();
+    
     for(i=0;i<nSubset;i++) printElem(i,y,yList,yPos);
-    //nl();
-    //printf("%i\n",nOfX);
-    
-    //nl();
-
-    //printX();
-    //printXPos();
-
-    //nl();
-    //for(i=0;i<nElem;i++) printElem(i,x,xList,xPos);
-
-/*
-    x =(short*) malloc(nElem * sizeof(short));
-    xPos = (short*) malloc(nElem * sizeof(short));
-    x[0]=1; //l'elemento 0 appare in 1 sottoinsieme
-    x[1]=1; //l'elemento 1 appare in 1 sottoinsieme
-    x[2]=2; //l'elemento 2 appare in 2 sottoinsieme
-    x[3]=2; //l'elemento 3 appare in 2 sottoinsieme
-    x[4]=1; //l'elemento 4 appare in 1 sottoinsieme
-
-    for(i=0;i<nElem;i++){
-        xPos[i]=nOfX;
-        nOfX+=x[i];
-    }
-    
-
-    xList = (short*) malloc (nOfX*sizeof(short));
-
-    xList[0]=1;
-    xList[1]=2;
-    xList[2]=0;
-    xList[3]=1;
-    xList[4]=0;
-    xList[5]=2;
-    xList[6]=2;
-
    
-
-    y = (short*) malloc(nSubset * sizeof(short));
-    yPos = (short*) malloc(nSubset * sizeof(short));
-
-    y[0]=2; //il sottinsieme 0 ha 2 elementi
-    y[1]=2; //il sottinsieme 1 ha 2 elementi
-    y[2]=3; //il sottinsieme 2 ha 3 elementi
-
-    yList = (short*) malloc (nOfY*sizeof(short));
-
-    yList[0]=2;
-    yList[1]=3;
-    yList[2]=0;
-    yList[3]=2;
-    yList[4]=1;
-    yList[5]=3;
-    yList[6]=4;
-
-
-    for(i=0;i<nSubset;i++){
-        yPos[i]=nOfY;
-        nOfY+=y[i];        
-    }
-
-    printf("%i\t%i\n",nOfX,nOfY);
-
-    //for(i=0;i<nElem;i++) printElem(i,x,xList,xPos);
-    
-*/  
     uncovered=nElem;
 
     printf("%i:%i\n",nElem,uncovered);

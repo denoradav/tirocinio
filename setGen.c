@@ -1,6 +1,7 @@
 #include <time.h>
 #include <math.h>
 #include "function.h"
+#include <glpk.h>
 //costanti
 
 
@@ -62,9 +63,11 @@ void setInit(char *argv1){
      //genero un numero casuale di sottoinsiemi 
     nElem = atoi(argv1);
     if (nElem<5) nElem=5;
-    upper = nElem -2;
+    upper = floor (nElem /2);
     lower = floor (nElem/4);
     if (lower<=2) lower=3;
+    if (lower<=2) lower=3;
+
     nSubSet = (rand() % (upper - lower + 1)) + lower;
     arr = (int*) malloc(sizeof(int)* nElem * nSubSet);
     
@@ -143,44 +146,66 @@ void writeOnfile(char* arg2){
         printf("\n");
         fprintf(fp,"\n");
     }
-    /*for(i=0; i<nElem * nSubSet; i++){
-        if(arr[i]==1){
-            printf("%i\t",i%nSubSet);
-            fprintf(fp,"%i;",i%nSubSet);0
-        }
-        if ((i+1)%nSubSet==0){
-            printf("\n");
-            fprintf(fp,"\n");
-        }
+///programma lineare
+    glp_prob *lp;
+    int *ra, *ca;
+    double *ar, z, *x;
+    char alpha[]="0abcdefghilmnopqrstuvz";
+    char letter[] ="a";
+
+    //inizializzo le variabili
+    ra = (int*) calloc (nElem*nSubSet+1,sizeof(int));
+    ca = (int*) calloc (nElem*nSubSet+1,sizeof(int));
+
+    ar= (double*) calloc (nElem*nSubSet+1,sizeof(double));
+    x= (double*) calloc (nSubSet,sizeof(double));
+
+    //inizializzo la variabile lp
+    lp = glp_create_prob();
+    glp_set_prob_name(lp,fName);
+    glp_set_obj_dir(lp,GLP_MIN);
+    glp_add_rows(lp, nElem);
+
+    for(i=1;i<=nElem;i++){
+        //substring(letter,alpha,i,1);
+        //printf("%s\n",letter);
+        //glp_set_row_name(lp, i,letter);
+        glp_set_row_bnds(lp, i, GLP_LO, 1.0, 1.0); 
     }
-    */
-    /*
-    printf("# elementi dei sottoinsiemi:");
-    for(i=0;i<nSubSet;i++){
-        subSetElem=0;
-        for (k=0;k<nSubSet*nElem;k=k+nSubSet){
-            index= i+k;
-            if(arr[index]==1) subSetElem++;
-        }
-        printf("%i;",subSetElem);
-        fprintf(fp,"%i;",subSetElem);
+
+    glp_add_cols(lp, nSubSet);
+    for (i=1;i<=nSubSet;i++){
+        //glp_set_col_name(lp, i, "x1");
+        glp_set_col_bnds(lp, i, GLP_DB, 0.0, 1.0);
+        glp_set_obj_coef(lp, i, 1.0);
     }
-    printf("\n");
-    fprintf(fp,"\n");
     
-    for(i=0;i<nSubSet;i++){
-        printf("sottoinsieme %i: ",i+1);
-        for (k=0;k<nSubSet*nElem;k=k+nSubSet){
-            index= i+k;
-            if(arr[index]==1) {
-                printf("%i;",k/nSubSet+1);
-                fprintf(fp,"%i;",k/nSubSet+1);
-            }
+
+    printf("###programma lineare\n");
+
+    for(i=0;i<nElem;i++){
+
+
+        for(k=0;k<nSubSet;k++){
+            index = i*nSubSet+k;
+            ra[index+1]=i+1;
+            ca[index+1]=k+1;
+            ar[index+1]=arr[index];
+
+            printf("%2i,%2i|%i\t",ra[index],ca[index],arr[index]);
         }
         printf("\n");
-        fprintf(fp,"\n");
-    } 
-    */  
+        
+    }
+    glp_load_matrix(lp, nElem*nSubSet, ra, ca, ar);
+    glp_simplex(lp, NULL);
+    z = glp_get_obj_val(lp);
+    for (i=1;i<=nSubSet;i++){
+       x[i-1]= glp_get_col_prim(lp, i);
+       printf("%i)%f\n",i,x[i-1]);
+       fprintf(fp,"%f\n",x[i-1]);
+    }
+   
     //chiudo il file;
     fclose(fp);
  }

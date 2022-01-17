@@ -1,3 +1,4 @@
+#include <glpk.h>
 #include "function.h"
 
 short nElem;

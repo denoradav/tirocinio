@@ -91,11 +91,14 @@ void init(){
         lp[i]=atof(line);
     }
 
+<<<<<<< HEAD
     
 
     
 
     
+=======
+>>>>>>> afae7d229c3e91e5e4fbd438c2361d5f6ff0b487
 }
 
 double rand01(){

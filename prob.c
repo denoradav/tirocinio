@@ -4,7 +4,7 @@
 short nElem;
 short nSubSet;
 short *matrix; //in questa variabile memorizziamo la "matrice" dei coefficenti
-double *lp; //in lp memorizziamo i volori ottenuti dalla risoluzione del 
+double *lp; //in lp memorizziamo i valori ottenuti dalla risoluzione del 
             //problema lineare
 
 
@@ -96,16 +96,6 @@ void init(){
     
 
     
-}
-
-void printMatrix(short* matrix,short rows,short cols){
-    int i,k;
-    for (i=0;i<rows;i++){
-        for(k=0;k<cols;k++){
-            printf("%i\t",matrix[i*cols+k]);
-        }
-        nl();
-    }
 }
 
 double rand01(){

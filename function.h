@@ -23,6 +23,16 @@ void ps(char* str){
     printf("%s\n",str);
 }
 
+void printMatrix(short* matrix,short rows,short cols){
+    int i,k;
+    for (i=0;i<rows;i++){
+        for(k=0;k<cols;k++){
+            printf("%i\t",matrix[i*cols+k]);
+        }
+        nl();
+    }
+}
+
 char* setFileName(char* arg2){
     int len = strlen(arg2)+13;
     fName = (char*) malloc (len * sizeof(char));
@@ -32,7 +42,7 @@ char* setFileName(char* arg2){
     //printf("%i\n",len);
     return fName;
 }
-
+/*
 char* substring(char *destination, const char *source, int beg, int n)
 {
     // extracts `n` characters from the source string starting from `beg` index
@@ -51,4 +61,4 @@ char* substring(char *destination, const char *source, int beg, int n)
  
     // return the destination string
     return destination;
-}
+}*/

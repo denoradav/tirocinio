@@ -91,21 +91,6 @@ void init(){
         lp[i]=atof(line);
     }
 
-    
-
-    
-
-    
-}
-
-void printMatrix(short* matrix,short rows,short cols){
-    int i,k;
-    for (i=0;i<rows;i++){
-        for(k=0;k<cols;k++){
-            printf("%i\t",matrix[i*cols+k]);
-        }
-        nl();
-    }
 }
 
 double rand01(){
